@@ -9,4 +9,4 @@
 
 ### sample rpc demo with nitty
 
-[![](https://github-readme-stats.vercel.app/api/pin/?username=giveme0101&repo=anotherredisdesktopmanager&theme=radical)](https://github.com/qishibo/AnotherRedisDesktopManager)
+[![](https://github-readme-stats.vercel.app/api/pin/?username=giveme0101&repo=easy-rpc&theme=radical)](https://github.com/giveme0101/easy-rpc)
