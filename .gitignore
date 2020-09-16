@@ -1,17 +1,18 @@
 #CJB
-src/**/bin/
-src/**/.classpath
-src/**/.project
-src/**/.settings
-src/**/build/
-src/**/out/
-src/*-interface/src/main/java/**/grpc
+/**/bin/
+/**/.classpath
+/**/.project
+/**/.settings
+/**/build/
+/**/out/
+/**/target/
 .DS_Store
 .gradle
 /build/
-src/gradle
-src/gradlew
-src/gradlew.*
+/logs/
+/gradle
+/gradlew
+/gradlew.*
 # Ignore Gradle GUI config
 gradle-app.setting
 

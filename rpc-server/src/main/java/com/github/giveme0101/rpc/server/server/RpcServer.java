@@ -19,6 +19,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -110,7 +111,11 @@ public class RpcServer implements IServer {
 
                             channel.pipeline()
 
+                                    // 心跳检测，60秒没有收到客户端的消息，触发
+                                    .addLast(new IdleStateHandler(60, 0, 0))
+
                                     .addLast(new LengthFieldBasedFrameDecoder(65536, 0, 4, 0, 0))
+
                                     .addLast(new RpcDecoder(RpcRequest.class, serializer))
                                     .addLast(new RpcEncoder(RpcResponse.class, serializer))
 

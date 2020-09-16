@@ -1,5 +1,6 @@
 package com.github.giveme0101.rpc.codec;
 
+import com.github.giveme0101.rpc.constant.RequestTypeEnum;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,6 +20,12 @@ public class RpcRequest implements Serializable {
 
     private String requestId;
 
+    /**
+     * 消息类型：0-心跳 1-普通消息
+     */
+    @Builder.Default
+    private byte type = RequestTypeEnum.MESSAGE.getType();
+
     private String className;
 
     private String methodName;
@@ -28,5 +35,9 @@ public class RpcRequest implements Serializable {
     private Object[] parameters;
 
     private String version;
+
+    public void setType(RequestTypeEnum type) {
+        this.type = type.getType();
+    }
 
 }

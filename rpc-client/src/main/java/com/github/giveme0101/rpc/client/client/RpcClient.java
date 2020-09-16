@@ -15,6 +15,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -32,6 +33,7 @@ public class RpcClient implements IClient {
 
     private String host;
     private int port;
+    private Serializer serializer;
     private AtomicInteger status = new AtomicInteger(AppConstants.STOP);
 
     public RpcClient(String ip, int port){
@@ -58,8 +60,17 @@ public class RpcClient implements IClient {
         return status.get() == AppConstants.RUNNING;
     }
 
+    public RpcClient setSerializer(Serializer serializer) {
+        this.serializer = serializer;
+        return this;
+    }
+
     private void doStart(){
         try {
+            if (null == serializer){
+                serializer = new ProtoStuffSerializer();
+            }
+
             Bootstrap client = new Bootstrap()
                     .group(bossGroup)
                     .channel(NioSocketChannel.class)
@@ -67,12 +78,14 @@ public class RpcClient implements IClient {
                         @Override
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
 
-                            Serializer serializer = new ProtoStuffSerializer();
-
                             nioSocketChannel.pipeline()
 
-                                    .addLast(new RpcEncoder(RpcRequest.class, serializer))
+                                    // 添加心跳 30秒没有向server发送消息，触发
+                                    .addLast(new IdleStateHandler(0, 30, 0))
+
                                     .addLast(new LengthFieldBasedFrameDecoder(65536, 0, 4, 0, 0))
+
+                                    .addLast(new RpcEncoder(RpcRequest.class, serializer))
                                     .addLast(new RpcDecoder(RpcResponse.class, serializer))
 
                                     .addLast(new ChannelClientHandler());

@@ -32,7 +32,7 @@ public class Client {
                 .build());
         log.info("{}", save);
 
-        context.stop();
+//        context.stop();
     }
 
 }

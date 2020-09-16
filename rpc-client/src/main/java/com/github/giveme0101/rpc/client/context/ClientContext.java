@@ -2,6 +2,7 @@ package com.github.giveme0101.rpc.client.context;
 
 import com.github.giveme0101.rpc.IContext;
 import com.github.giveme0101.rpc.client.client.RpcClient;
+import com.github.giveme0101.rpc.serialize.protostuff.ProtoStuffSerializer;
 import com.github.giveme0101.rpc.util.PropertiesUtil;
 
 import java.util.Properties;
@@ -32,7 +33,8 @@ public class ClientContext extends AbstractFactory implements IContext {
 
     @Override
     public void start() {
-        rpcClient = new RpcClient(host, port);
+        rpcClient = new RpcClient(host, port)
+                .setSerializer(new ProtoStuffSerializer());
         rpcClient.start();
     }
 
