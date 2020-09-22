@@ -18,4 +18,6 @@ import static java.lang.annotation.ElementType.TYPE;
 @Target(value = TYPE)
 public @interface RpcService {
 
+    String version() default "";
+
 }

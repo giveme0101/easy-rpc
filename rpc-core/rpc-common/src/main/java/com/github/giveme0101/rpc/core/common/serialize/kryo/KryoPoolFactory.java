@@ -3,8 +3,8 @@ package com.github.giveme0101.rpc.core.common.serialize.kryo;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.pool.KryoFactory;
 import com.esotericsoftware.kryo.pool.KryoPool;
-import com.github.giveme0101.rpc.core.common.codec.RpcRequest;
-import com.github.giveme0101.rpc.core.common.codec.RpcResponse;
+import com.github.giveme0101.rpc.core.common.entity.RpcRequest;
+import com.github.giveme0101.rpc.core.common.entity.RpcResponse;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
 public class KryoPoolFactory {

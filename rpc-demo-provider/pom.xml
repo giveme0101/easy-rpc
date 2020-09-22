@@ -7,20 +7,19 @@
         <groupId>com.github.giveme0101</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>rpc-core</artifactId>
 
-    <modules>
-        <module>rpc-common</module>
-        <module>rpc-consumer</module>
-        <module>rpc-provider</module>
-    </modules>
+    <artifactId>rpc-demo-provider</artifactId>
 
-    <properties>
-        <rpc-core.version>1.0-SNAPSHOT</rpc-core.version>
-        <rpc-client.version>1.0-SNAPSHOT</rpc-client.version>
-        <rpc-server.version>1.0-SNAPSHOT</rpc-server.version>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.giveme0101</groupId>
+            <artifactId>rpc-demo-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.giveme0101</groupId>
+            <artifactId>rpc-provider</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

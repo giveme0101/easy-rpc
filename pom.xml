@@ -12,17 +12,19 @@
 
     <modules>
         <module>rpc-core</module>
-        <module>rpc-test-api</module>
-        <module>rpc-test-client</module>
-        <module>rpc-test-server</module>
+        <module>redis-register</module>
+        <module>rpc-demo-api</module>
+        <module>rpc-demo-consumer</module>
+        <module>rpc-demo-provider</module>
     </modules>
 
     <properties>
 
-        <rpc-test-api.version>1.0-SNAPSHOT</rpc-test-api.version>
+        <rpc-demo-api.version>1.0-SNAPSHOT</rpc-demo-api.version>
         <rpc-common.version>1.0-SNAPSHOT</rpc-common.version>
-        <rpc-client.version>1.0-SNAPSHOT</rpc-client.version>
-        <rpc-server.version>1.0-SNAPSHOT</rpc-server.version>
+        <rpc-consumer.version>1.0-SNAPSHOT</rpc-consumer.version>
+        <rpc-provider.version>1.0-SNAPSHOT</rpc-provider.version>
+        <redis.register.version>1.0-SNAPSHOT</redis.register.version>
 
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,6 +34,8 @@
         <lombok.version>1.18.12</lombok.version>
         <logback.version>1.1.7</logback.version>
         <netty.version>4.1.50.Final</netty.version>
+        <jedis.version>2.6.0</jedis.version>
+        <fastjson.version>1.2.10</fastjson.version>
         <protobuf.version>3.12.4</protobuf.version>
         <protosuf.version>1.7.2</protosuf.version>
         <hession.version>4.0.63</hession.version>
@@ -62,23 +66,34 @@
 
             <dependency>
                 <groupId>com.github.giveme0101</groupId>
-                <artifactId>rpc-test-api</artifactId>
-                <version>${rpc-test-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.giveme0101</groupId>
                 <artifactId>rpc-common</artifactId>
                 <version>${rpc-common.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.giveme0101</groupId>
-                <artifactId>rpc-client</artifactId>
-                <version>${rpc-client.version}</version>
+                <artifactId>rpc-consumer</artifactId>
+                <version>${rpc-consumer.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.giveme0101</groupId>
-                <artifactId>rpc-server</artifactId>
-                <version>${rpc-server.version}</version>
+                <artifactId>rpc-provider</artifactId>
+                <version>${rpc-provider.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.giveme0101</groupId>
+                <artifactId>redis-register</artifactId>
+                <version>${redis.register.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.giveme0101</groupId>
+                <artifactId>rpc-demo-api</artifactId>
+                <version>${rpc-demo-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
             <dependency>
@@ -90,6 +105,12 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
                 <version>${protobuf.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
             </dependency>
 
             <dependency>

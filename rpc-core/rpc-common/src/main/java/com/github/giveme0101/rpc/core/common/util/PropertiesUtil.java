@@ -1,5 +1,6 @@
 package com.github.giveme0101.rpc.core.common.util;
 
+import com.github.giveme0101.rpc.core.common.config.RegistryConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -35,6 +36,18 @@ public class PropertiesUtil {
             log.error("读取配置文件[{}]失败：", path, ex.getMessage(), ex);
             throw new RuntimeException("读取配置文件[" + path + "]失败", ex);
         }
+    }
+
+    public static RegistryConfig parseRegistryConfig(Properties properties){
+
+        String host = properties.getProperty("registry.host", "localhost");
+        int port = Integer.valueOf(properties.getProperty("registry.port", "6699"));
+        String passwrod = properties.getProperty("registry.password", "");
+
+        return new RegistryConfig()
+                .setServerHost(host)
+                .setPort(port)
+                .setPassword(passwrod);
     }
 
 }

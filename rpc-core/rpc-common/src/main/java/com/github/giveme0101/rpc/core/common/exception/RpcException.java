@@ -1,5 +1,7 @@
 package com.github.giveme0101.rpc.core.common.exception;
 
+import com.github.giveme0101.rpc.core.common.util.RpcErrorMessage;
+
 /**
  * @Author kevin xiajun94@FoxMail.com
  * @Description
@@ -7,6 +9,7 @@ package com.github.giveme0101.rpc.core.common.exception;
  * @Date 2020/09/16 10:24
  */
 public class RpcException extends RuntimeException{
+
     public RpcException() {
     }
 
@@ -14,8 +17,16 @@ public class RpcException extends RuntimeException{
         super(message);
     }
 
+    public RpcException(String code, String message) {
+        super(code + ": " + message);
+    }
+
     public RpcException(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    public RpcException(RpcErrorMessage errorMessage){
+        super(errorMessage.getMessage());
     }
 
     public RpcException(Throwable cause) {
