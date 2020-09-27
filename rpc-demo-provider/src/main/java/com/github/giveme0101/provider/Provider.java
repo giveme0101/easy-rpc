@@ -22,7 +22,7 @@ public class Provider {
 
         // 配置注册中心
         RedisRegister redisRegister = RedisRegister.getInstance(host, port, password);
-        context.addEventListener(new RegistrySupport(redisRegister));
+        context.setProviderRegister(redisRegister);
 
         // 启动服务
         context.start();

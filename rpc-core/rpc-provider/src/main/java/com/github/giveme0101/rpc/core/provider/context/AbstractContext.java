@@ -2,6 +2,7 @@ package com.github.giveme0101.rpc.core.provider.context;
 
 import com.github.giveme0101.rpc.core.common.IContext;
 import com.github.giveme0101.rpc.core.common.entity.RpcServiceProperties;
+import com.github.giveme0101.rpc.core.common.register.ProviderRegister;
 import com.github.giveme0101.rpc.core.common.util.PropertiesReadable;
 import com.github.giveme0101.rpc.core.common.util.PropertiesReader;
 import com.github.giveme0101.rpc.core.common.util.SingletonFactory;
@@ -48,6 +49,10 @@ public abstract class AbstractContext extends Observable implements IContext, Pr
     public void stop() {
         contextStop();
         stopServer();
+    }
+
+    public void setProviderRegister(ProviderRegister register) {
+        this.addObserver(new RegistrySupport(register));
     }
 
     public void addEventListener(Observer observer){
