@@ -1,6 +1,6 @@
 package com.github.giveme0101.provider;
 
-import com.github.giveme0101.RedisRegister;
+import com.github.giveme0101.rpc.core.common.register.ProviderRegister;
 import com.github.giveme0101.rpc.core.provider.context.EventEnum;
 import com.github.giveme0101.rpc.core.provider.context.ServiceProvider;
 import com.github.giveme0101.rpc.core.provider.util.LocalAddressHolder;
@@ -14,16 +14,16 @@ import java.util.Observer;
 /**
  * @Author kevin xiajun94@FoxMail.com
  * @Description
- * @name RedisRegistry
+ * @name RegistrySupport
  * @Date 2020/09/21 14:32
  */
 @Slf4j
-public class RedisRegistry implements Observer {
+public class RegistrySupport implements Observer {
 
-    private RedisRegister register;
+    private ProviderRegister register;
 
-    public RedisRegistry(String host, String pwd, int port) {
-        register = RedisRegister.getInstance(host, port, pwd);
+    public RegistrySupport(ProviderRegister register) {
+        this.register = register;
     }
 
     @Override
@@ -48,7 +48,6 @@ public class RedisRegistry implements Observer {
                 log.info("移除服务注册: {}", interfaceName);
             });
         }
-
     }
 
 }

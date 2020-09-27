@@ -10,6 +10,6 @@ import java.util.Collection;
  */
 public interface LoadBalance {
 
-    <T> T get(Collection<T> list);
+    <T> T select(Collection<T> list);
 
 }

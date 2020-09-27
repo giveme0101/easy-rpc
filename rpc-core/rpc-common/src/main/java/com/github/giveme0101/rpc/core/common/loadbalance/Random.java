@@ -12,7 +12,7 @@ import java.util.Collection;
 public class Random implements LoadBalance  {
 
     @Override
-    public <T> T get(Collection<T> collection) {
+    public <T> T select(Collection<T> collection) {
         int num = new java.util.Random().nextInt(collection.size());
         return new ArrayList<>(collection).get(num);
     }

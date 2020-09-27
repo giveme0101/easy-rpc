@@ -15,7 +15,7 @@ public class RoundRobin implements LoadBalance{
     private static final AtomicInteger POS = new AtomicInteger(0);
 
     @Override
-    public <T> T get(Collection<T> list) {
+    public <T> T select(Collection<T> list) {
 
         if (POS.get() >= list.size()){
             POS.set(0);

@@ -1,5 +1,6 @@
 package com.github.giveme0101.provider;
 
+import com.github.giveme0101.RedisRegister;
 import com.github.giveme0101.rpc.core.provider.context.NettyServerContext;
 
 /**
@@ -20,7 +21,8 @@ public class Provider {
         String password = context.getProperty("registry.password");
 
         // 配置注册中心
-        context.addEventListener(new RedisRegistry(host, password, port));
+        RedisRegister redisRegister = RedisRegister.getInstance(host, port, password);
+        context.addEventListener(new RegistrySupport(redisRegister));
 
         // 启动服务
         context.start();

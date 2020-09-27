@@ -5,6 +5,7 @@ import com.github.giveme0101.api.IOrderService;
 import com.github.giveme0101.api.IProductService;
 import com.github.giveme0101.api.entity.OrderVO;
 import com.github.giveme0101.api.entity.ProductVO;
+import com.github.giveme0101.rpc.core.common.register.ProviderDiscovery;
 import com.github.giveme0101.rpc.core.consumer.context.NettyClientContext;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,8 +27,9 @@ public class Consumer {
         int port = Integer.valueOf(context.getProperty("registry.port"));
         String password = context.getProperty("registry.password");
 
-        // 配置注册中心
-        context.setProviderDiscovery(RedisRegister.getInstance(host, port, password));
+        // 配置服务注册中心
+        ProviderDiscovery redisRegister = RedisRegister.getInstance(host, port, password);
+        context.setProviderDiscovery(redisRegister);
 
         // 获取代理对象进行远程调用
         IOrderService orderClient = context.getClient(IOrderService.class);

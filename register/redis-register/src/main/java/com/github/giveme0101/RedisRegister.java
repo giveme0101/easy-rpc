@@ -61,7 +61,7 @@ public class RedisRegister implements ProviderRegister, ProviderDiscovery {
     @Override
     public InetSocketAddress lookupProvider(String nozzle, LoadBalance balance) {
         Set<String> members = jedis.smembers(nozzle);
-        String member = balance.get(members);
+        String member = balance.select(members);
         String[] socketAddressArray = member.split(":");
         String host = socketAddressArray[0];
         int port = Integer.parseInt(socketAddressArray[1]);
