@@ -1,16 +1,16 @@
 package com.github.giveme0101.rpc.core.provider.context;
 
 import com.github.giveme0101.rpc.core.common.IContext;
-import com.github.giveme0101.rpc.core.common.RpcService;
 import com.github.giveme0101.rpc.core.common.entity.RpcServiceProperties;
-import com.github.giveme0101.rpc.core.common.util.PropertiesUtil;
+import com.github.giveme0101.rpc.core.common.util.PropertiesReadable;
+import com.github.giveme0101.rpc.core.common.util.PropertiesReader;
 import com.github.giveme0101.rpc.core.common.util.SingletonFactory;
-import com.github.giveme0101.rpc.core.provider.util.Scanner;
+import com.github.giveme0101.rpc.core.provider.util.RpcScanner;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Observable;
-import java.util.Properties;
+import java.util.Observer;
 
 /**
  * @Author kevin xiajun94@FoxMail.com
@@ -19,17 +19,23 @@ import java.util.Properties;
  * @Date 2020/09/21 15:11
  */
 @Slf4j
-public abstract class AbstractContext extends Observable implements IContext {
+public abstract class AbstractContext extends Observable implements IContext, PropertiesReadable, ServiceProvider {
 
     protected ServiceProvider serviceProvider;
+    protected PropertiesReader propertiesReader;
 
     public AbstractContext(){
+
+        propertiesReader = new PropertiesReader("application.properties");
         serviceProvider = SingletonFactory.getInstance(ServiceProviderImpl.class);
-        loadConfigProperties();
-        start();
+
+        String rpcPackage = propertiesReader.getProperty("service.impl.package");
+        RpcScanner.scanRpcService(rpcPackage, serviceProvider);
+
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             stop();
         }));
+
     }
 
     @Override
@@ -42,6 +48,10 @@ public abstract class AbstractContext extends Observable implements IContext {
     public void stop() {
         contextStop();
         stopServer();
+    }
+
+    public void addEventListener(Observer observer){
+        this.addObserver(observer);
     }
 
     public void contextStarting(){
@@ -59,40 +69,33 @@ public abstract class AbstractContext extends Observable implements IContext {
         this.notifyObservers(EventEnum.STOP);
     }
 
-    protected void loadConfigProperties() {
+    @Override
+    public void loadProperties(String... configPath) {
+        propertiesReader.loadProperties(configPath);
+    }
 
-        Properties properties = PropertiesUtil.load("application.properties");
+    @Override
+    public String getProperty(String key) {
+        return propertiesReader.getProperty(key);
+    }
 
-        String implPackage = properties.getProperty("service.impl.package");
-        if (null == implPackage){
-            throw new NullPointerException("missing or invalid config properties: service.impl.package");
-        }
+    @Override
+    public void addService(Object service, RpcServiceProperties rpcServiceProperties) {
+        serviceProvider.addService(service, rpcServiceProperties);
+    }
 
-        List<Class> clazzList = Scanner.scan(implPackage);
-        clazzList.stream()
-                .filter(clz -> clz.isAnnotationPresent(RpcService.class))
-                .forEach(impl -> {
-                    RpcService rpcService = (RpcService) impl.getAnnotation(RpcService.class);
-                    Class[] interfaces = impl.getInterfaces();
-                    for (final Class anInterface : interfaces) {
+    @Override
+    public Object getService(RpcServiceProperties rpcServiceProperties) {
+        return serviceProvider.getService(rpcServiceProperties);
+    }
 
-                        RpcServiceProperties rpcServiceProperties = RpcServiceProperties.builder()
-                                .serviceName(anInterface.getName())
-                                .version(rpcService.version())
-                                .build();
-                        Object instance = SingletonFactory.getInstance(impl);
-                        serviceProvider.addService(instance, rpcServiceProperties);
-                        log.info("scan impl {} -> {}", anInterface.getName(), impl);
-
-                    }
-                });
-
-        afterPropertiesRead(properties);
+    @Override
+    public Map<String, Object> getServiceMap() {
+        return serviceProvider.getServiceMap();
     }
 
     protected abstract void startServer();
 
     protected abstract void stopServer();
 
-    protected abstract void afterPropertiesRead(Properties properties);
 }

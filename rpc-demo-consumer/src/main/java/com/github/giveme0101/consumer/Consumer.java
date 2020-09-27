@@ -1,5 +1,6 @@
 package com.github.giveme0101.consumer;
 
+import com.github.giveme0101.RedisRegister;
 import com.github.giveme0101.api.IOrderService;
 import com.github.giveme0101.api.IProductService;
 import com.github.giveme0101.api.entity.OrderVO;
@@ -20,6 +21,15 @@ public class Consumer {
 
         NettyClientContext context = new NettyClientContext();
 
+        // 获取项目配置
+        String host = context.getProperty("registry.host");
+        int port = Integer.valueOf(context.getProperty("registry.port"));
+        String password = context.getProperty("registry.password");
+
+        // 配置注册中心
+        context.setProviderDiscovery(RedisRegister.getInstance(host, port, password));
+
+        // 获取代理对象进行远程调用
         IOrderService orderClient = context.getClient(IOrderService.class);
         OrderVO orderInfo = orderClient.getOrder("I001");
         log.info("{}", orderInfo);

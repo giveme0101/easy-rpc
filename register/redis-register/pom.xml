@@ -3,29 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>easy-rpc</artifactId>
+        <artifactId>register</artifactId>
         <groupId>com.github.giveme0101</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rpc-demo-consumer</artifactId>
+    <artifactId>redis-register</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.github.giveme0101</groupId>
-            <artifactId>rpc-consumer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.giveme0101</groupId>
-            <artifactId>redis-register</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.giveme0101</groupId>
-            <artifactId>rpc-demo-api</artifactId>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

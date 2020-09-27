@@ -3,6 +3,7 @@ package com.github.giveme0101.rpc.core.consumer.context;
 import com.github.giveme0101.rpc.core.common.entity.RpcRequest;
 import com.github.giveme0101.rpc.core.common.entity.RpcResponse;
 import com.github.giveme0101.rpc.core.common.exception.RpcException;
+import com.github.giveme0101.rpc.core.common.register.ProviderDiscovery;
 import com.github.giveme0101.rpc.core.consumer.client.ChannelProvider;
 import com.github.giveme0101.rpc.core.consumer.util.ProcessingRequests;
 import io.netty.channel.Channel;
@@ -10,7 +11,6 @@ import io.netty.channel.ChannelFutureListener;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
-import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -26,11 +26,11 @@ public class NettyClientContext extends AbstractContext {
 
     public NettyClientContext(){
         super();
+        channelProvider = new ChannelProvider();
     }
 
-    @Override
-    protected void afterPropertiesRead(Properties properties) {
-        channelProvider = new ChannelProvider();
+    public void setProviderDiscovery(ProviderDiscovery discovery){
+        this.providerDiscover = discovery;
     }
 
     @Override

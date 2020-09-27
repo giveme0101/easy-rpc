@@ -14,11 +14,15 @@
     <dependencies>
         <dependency>
             <groupId>com.github.giveme0101</groupId>
-            <artifactId>rpc-demo-api</artifactId>
+            <artifactId>rpc-provider</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.giveme0101</groupId>
-            <artifactId>rpc-provider</artifactId>
+            <artifactId>redis-register</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.giveme0101</groupId>
+            <artifactId>rpc-demo-api</artifactId>
         </dependency>
     </dependencies>
 

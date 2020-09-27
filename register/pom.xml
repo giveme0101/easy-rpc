@@ -9,16 +9,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>redis-register</artifactId>
+    <artifactId>register</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>redis-register</module>
+        <module>zookeeper-register</module>
+    </modules>
 
     <dependencies>
         <dependency>
             <groupId>com.github.giveme0101</groupId>
             <artifactId>rpc-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
         </dependency>
     </dependencies>
 
