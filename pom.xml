@@ -13,20 +13,24 @@
     <modules>
         <module>rpc-core</module>
         <module>register</module>
-        <module>rpc-demo-api</module>
-        <module>rpc-demo-consumer</module>
-        <module>rpc-demo-provider</module>
+        <module>rpc-demo</module>
+        <module>easy-rpc-spring-boot-starter</module>
     </modules>
 
     <properties>
 
+        <rpc-core.version>1.0-SNAPSHOT</rpc-core.version>
         <rpc-common.version>1.0-SNAPSHOT</rpc-common.version>
         <rpc-consumer.version>1.0-SNAPSHOT</rpc-consumer.version>
         <rpc-provider.version>1.0-SNAPSHOT</rpc-provider.version>
+        <easy-rpc-spring-boot-starter.version>1.0-SNAPSHOT</easy-rpc-spring-boot-starter.version>
+
         <redis.register.version>1.0-SNAPSHOT</redis.register.version>
         <zookeeper.register.version>1.0-SNAPSHOT</zookeeper.register.version>
 
         <rpc-demo-api.version>1.0-SNAPSHOT</rpc-demo-api.version>
+
+        <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
 
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,6 +47,8 @@
         <hession.version>4.0.63</hession.version>
         <kryo.version>4.0.2</kryo.version>
         <objenesis.version>3.1</objenesis.version>
+        <junit.version>4.12</junit.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -61,10 +67,21 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.github.giveme0101</groupId>
+                <artifactId>rpc-core</artifactId>
+                <version>${rpc-core.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.github.giveme0101</groupId>
@@ -80,6 +97,11 @@
                 <groupId>com.github.giveme0101</groupId>
                 <artifactId>rpc-provider</artifactId>
                 <version>${rpc-provider.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.giveme0101</groupId>
+                <artifactId>easy-rpc-spring-boot-starter</artifactId>
+                <version>${easy-rpc-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.giveme0101</groupId>
@@ -148,6 +170,22 @@
                 <artifactId>objenesis</artifactId>
                 <version>${objenesis.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

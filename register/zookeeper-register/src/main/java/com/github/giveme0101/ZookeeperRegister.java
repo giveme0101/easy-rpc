@@ -1,8 +1,8 @@
 package com.github.giveme0101;
 
-import com.github.giveme0101.rpc.core.common.loadbalance.LoadBalance;
-import com.github.giveme0101.rpc.core.common.register.ProviderDiscovery;
-import com.github.giveme0101.rpc.core.common.register.ProviderRegister;
+import com.github.easyrpc.common.loadbalance.LoadBalance;
+import com.github.easyrpc.common.register.ProviderDiscovery;
+import com.github.easyrpc.common.register.ProviderRegister;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;

@@ -7,8 +7,9 @@ A easy rpc framework with Netty
 * [x] [心跳检测](#心跳检测)
 * [x] [注册中心](#注册中心)
 * [x] [负载均衡](#负载均衡)
+* [X] [SPI](#SPI)
 * [ ] 断线重连
-* [ ] SPI
+* [ ] 整合SpringBoot
 
 ### netty
 底层用netty通信
@@ -25,3 +26,6 @@ protostuff、hession、kryo
 
 ### 负载均衡
 默认随机
+
+### SPI
+参考Spring的SPI， SpringFactoriesLoader.java
