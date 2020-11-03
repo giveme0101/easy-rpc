@@ -1,8 +1,8 @@
 package com.github.easyrpc.provider.rpc;
 
+import com.github.easyrpc.starter.provider.RpcService;
 import com.github.giveme0101.api.IOrderRpc;
 import com.github.giveme0101.api.entity.OrderDTO;
-import com.github.easyrpc.starter.provider.RpcService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -14,15 +14,15 @@ import java.util.Date;
  * @Date 2020/10/29 11:01
  */
 @Slf4j
-@RpcService(serviceName = "orderRpc", version = "1.0")
-public class OrderRpcImpl implements IOrderRpc {
+@RpcService(serviceName = "orderRpc", version = "2.0")
+public class OrderRpcImplV2 implements IOrderRpc {
 
     @Override
     public OrderDTO getOrder(String orderNo) {
 
         log.info("orderNo: {}", orderNo);
         OrderDTO orderDTO = OrderDTO.builder()
-                .orderNo("V1 -- " + orderNo)
+                .orderNo("V2 -- " + orderNo)
                 .orderAmount(10.1)
                 .createTime(new Date())
                 .build();

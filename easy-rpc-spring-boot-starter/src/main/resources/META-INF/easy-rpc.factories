@@ -1,4 +1,3 @@
 
-# 服务注册发现中心
-com.github.easyrpc.common.register.RegisterFactory=\
-    com.github.giveme0101.RedisRegisterFactory
+#com.github.easyrpc.common.serialize.Serializer=\
+#    com.github.easyrpc.common.serialize.kryo.KryoSerializer

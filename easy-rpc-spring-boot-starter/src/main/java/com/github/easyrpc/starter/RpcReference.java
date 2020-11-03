@@ -15,4 +15,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RpcReference {
 
+    String serviceName() default "";
+
+    String version() default "";
+
 }

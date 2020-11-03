@@ -1,4 +1,4 @@
-package com.github.giveme0101;
+package com.github.easyrpc.common.register.redis;
 
 import com.github.easyrpc.common.loadbalance.LoadBalance;
 import com.github.easyrpc.common.register.ProviderRegister;

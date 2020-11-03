@@ -1,4 +1,4 @@
-package com.github.easyrpc.core.provider;
+package com.github.easyrpc.starter.provider;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -17,6 +17,8 @@ import static java.lang.annotation.ElementType.TYPE;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = TYPE)
 public @interface RpcService {
+
+    String serviceName() default "";
 
     String version() default "";
 

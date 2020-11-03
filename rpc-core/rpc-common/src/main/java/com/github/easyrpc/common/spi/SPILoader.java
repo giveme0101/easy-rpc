@@ -2,7 +2,6 @@ package com.github.easyrpc.common.spi;
 
 import com.github.easyrpc.common.util.LinkedMultiValueMap;
 import com.github.easyrpc.common.util.MultiValueMap;
-import com.github.easyrpc.common.config.PropertiesLoader;
 import com.github.easyrpc.common.util.ReflectionUtils;
 import com.sun.istack.internal.Nullable;
 import lombok.extern.slf4j.Slf4j;

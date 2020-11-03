@@ -3,6 +3,7 @@ package com.github.easyrpc.core.consumer.factory;
 import com.github.easyrpc.common.entity.RpcRequest;
 import com.github.easyrpc.common.entity.RpcResponse;
 import com.github.easyrpc.common.exception.RpcMessageChecker;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -18,8 +19,7 @@ import java.util.concurrent.Future;
 public abstract class AbstractProxyFactory implements IClientFactory {
 
     @Override
-    public  <T> T getClient(Class<T> clazz){
-
+    public <T> T getClient(Class<T> clazz, String serviceName, String version) {
         Object instance = Proxy.newProxyInstance(AbstractProxyFactory.class.getClassLoader(), new Class[]{clazz}, (Object proxy, Method method, Object[] args) -> {
 
             if (Object.class == method.getDeclaringClass()) {
@@ -41,7 +41,8 @@ public abstract class AbstractProxyFactory implements IClientFactory {
 
             RpcRequest rpcRequest = RpcRequest.builder()
                     .requestId(UUID.randomUUID().toString())
-                    .className(clazz.getName())
+                    .className(StringUtils.isEmpty(serviceName) ? clazz.getName() : serviceName)
+                    .version(version)
                     .methodName(method.getName())
                     .parameterTypes(method.getParameterTypes())
                     .parameters(args)
@@ -53,6 +54,11 @@ public abstract class AbstractProxyFactory implements IClientFactory {
         });
 
         return (T) instance;
+    }
+
+    @Override
+    public  <T> T getClient(Class<T> clazz){
+        return getClient(clazz, null, null);
     }
 
    abstract Future<RpcResponse> sendRequest(RpcRequest request);
