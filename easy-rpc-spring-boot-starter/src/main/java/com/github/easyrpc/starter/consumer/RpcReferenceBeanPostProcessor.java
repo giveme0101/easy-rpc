@@ -1,7 +1,7 @@
 package com.github.easyrpc.starter.consumer;
 
 import com.github.easyrpc.common.util.ReflectionUtils;
-import com.github.easyrpc.core.consumer.context.NettyClientContext;
+import com.github.easyrpc.core.provider.context.NettyServerContext;
 import com.github.easyrpc.starter.RpcReference;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
  */
 public class RpcReferenceBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter implements ApplicationContextAware {
 
-    private NettyClientContext nettyClientContext;
+    private NettyServerContext nettyClientContext;
 
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
@@ -49,6 +49,6 @@ public class RpcReferenceBeanPostProcessor extends InstantiationAwareBeanPostPro
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        nettyClientContext = applicationContext.getBean(NettyClientContext.class);
+        nettyClientContext = applicationContext.getBean(NettyServerContext.class);
     }
 }

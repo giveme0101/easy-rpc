@@ -1,4 +1,4 @@
-package com.github.easyrpc.core.consumer.factory;
+package com.github.easyrpc.core.provider.factory;
 
 import com.github.easyrpc.common.entity.RpcRequest;
 import com.github.easyrpc.common.entity.RpcResponse;

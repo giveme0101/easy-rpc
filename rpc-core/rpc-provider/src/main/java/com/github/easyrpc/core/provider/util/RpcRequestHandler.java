@@ -2,7 +2,7 @@ package com.github.easyrpc.core.provider.util;
 
 import com.github.easyrpc.common.entity.RpcRequest;
 import com.github.easyrpc.common.exception.RpcException;
-import com.github.easyrpc.core.provider.context.ServiceProvider;
+import com.github.easyrpc.core.provider.server.ServiceProvider;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;

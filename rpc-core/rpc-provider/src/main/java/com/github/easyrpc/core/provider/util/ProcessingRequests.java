@@ -1,4 +1,4 @@
-package com.github.easyrpc.core.consumer.util;
+package com.github.easyrpc.core.provider.util;
 
 import com.github.easyrpc.common.entity.RpcResponse;
 

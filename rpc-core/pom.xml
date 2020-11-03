@@ -14,7 +14,6 @@
 
     <modules>
         <module>rpc-common</module>
-        <module>rpc-consumer</module>
         <module>rpc-provider</module>
     </modules>
 

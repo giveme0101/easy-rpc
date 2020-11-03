@@ -1,11 +1,11 @@
-package com.github.easyrpc.core.consumer.factory;
+package com.github.easyrpc.core.provider.factory;
 
 import com.github.easyrpc.common.entity.RpcRequest;
 import com.github.easyrpc.common.entity.RpcResponse;
 import com.github.easyrpc.common.exception.RpcException;
 import com.github.easyrpc.common.register.ProviderRegister;
-import com.github.easyrpc.core.consumer.client.ChannelProvider;
-import com.github.easyrpc.core.consumer.util.ProcessingRequests;
+import com.github.easyrpc.core.provider.client.ChannelProvider;
+import com.github.easyrpc.core.provider.util.ProcessingRequests;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class DefaultProxyFactory extends AbstractProxyFactory {
 
         CompletableFuture<RpcResponse> resultFuture = new CompletableFuture<>();
 
-        String serviceKey = request.getClassName() + "::" + request.getVersion();
+        String serviceKey = request.getClassName() + ":" + request.getVersion();
 
         InetSocketAddress provider = providerDiscover.lookupProvider(serviceKey);
         if (null == provider){

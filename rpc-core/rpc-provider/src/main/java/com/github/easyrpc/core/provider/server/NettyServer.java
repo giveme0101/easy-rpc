@@ -10,7 +10,6 @@ import com.github.easyrpc.common.serialize.Serializer;
 import com.github.easyrpc.common.server.IServer;
 import com.github.easyrpc.common.util.Assert;
 import com.github.easyrpc.common.util.NetUtil;
-import com.github.easyrpc.core.provider.context.ServiceProvider;
 import com.github.easyrpc.core.provider.handle.ChannelServerHandler;
 import com.github.easyrpc.core.provider.util.LocalAddressHolder;
 import io.netty.bootstrap.ServerBootstrap;

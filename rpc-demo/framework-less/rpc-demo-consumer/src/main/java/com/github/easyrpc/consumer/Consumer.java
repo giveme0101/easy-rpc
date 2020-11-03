@@ -1,7 +1,7 @@
 package com.github.easyrpc.consumer;
 
-import com.github.easyrpc.common.config.AppConfig;
-import com.github.easyrpc.core.consumer.context.NettyClientContext;
+import com.github.easyrpc.common.config.ProviderConfig;
+import com.github.easyrpc.core.provider.context.NettyServerContext;
 import com.github.giveme0101.api.IOrderRpc;
 import com.github.giveme0101.api.IProductRpc;
 import com.github.giveme0101.api.entity.OrderDTO;
@@ -19,10 +19,11 @@ public class Consumer {
 
     public static void main(String[] args) {
 
-        AppConfig config = new AppConfig();
+        ProviderConfig config = new ProviderConfig();
         config.setSerializer("kryo");
         config.setRegistryAddress("redis://mypassword@192.168.200.244:6379");
-        NettyClientContext context = new NettyClientContext(config);
+        NettyServerContext context = new NettyServerContext(config);
+        context.run();
 
         // 获取代理对象进行远程调用
         IOrderRpc orderClient = context.getClient(IOrderRpc.class);

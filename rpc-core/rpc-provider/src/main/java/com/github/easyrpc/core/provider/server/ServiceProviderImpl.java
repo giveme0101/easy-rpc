@@ -1,4 +1,4 @@
-package com.github.easyrpc.core.provider.context;
+package com.github.easyrpc.core.provider.server;
 
 import com.github.easyrpc.common.entity.RpcServiceReference;
 import com.github.easyrpc.common.exception.RpcException;
@@ -59,7 +59,7 @@ public class ServiceProviderImpl implements ServiceProvider {
         String serviceName = rpcServiceReference.getServiceName();
         String version = rpcServiceReference.getVersion();
 
-        return serviceName + "::" + version;
+        return serviceName + ":" + version;
     }
 
 }

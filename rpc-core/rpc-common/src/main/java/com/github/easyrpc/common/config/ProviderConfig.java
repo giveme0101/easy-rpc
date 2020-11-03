@@ -1,8 +1,10 @@
-package com.github.easyrpc.core.provider;
+package com.github.easyrpc.common.config;
 
-import com.github.easyrpc.common.config.AppConfig;
 import com.github.easyrpc.common.entity.RpcServiceReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +19,24 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProviderConfig extends AppConfig {
+public class ProviderConfig {
+
+    /**
+     * 注册中心配置
+     */
+    private String registryAddress;
+
+    /**
+     * 序列化协议
+     */
+    private String serializer;
 
     /**
      * rpc服务类
      */
     private List<RpcServiceReference> rpcServiceReferences;
 
-    public AppConfig addRpcServiceReference(RpcServiceReference rpcServiceReference){
+    public ProviderConfig addRpcServiceReference(RpcServiceReference rpcServiceReference){
 
         if (null == rpcServiceReferences){
             rpcServiceReferences = new ArrayList<>();
