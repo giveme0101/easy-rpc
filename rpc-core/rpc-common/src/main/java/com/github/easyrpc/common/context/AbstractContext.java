@@ -1,26 +1,18 @@
 package com.github.easyrpc.common.context;
 
 import com.github.easyrpc.common.config.AppConfig;
-import com.github.easyrpc.common.config.ConfigReader;
-import com.github.easyrpc.common.config.DefaultConfigReader;
-import com.github.easyrpc.common.constant.AppConstants;
 import com.github.easyrpc.common.entity.ContextEvent;
+import com.github.easyrpc.common.register.DefaultRegisterFactory;
 import com.github.easyrpc.common.register.ProviderRegister;
-import com.github.easyrpc.common.register.RegisterFactory;
-import com.github.easyrpc.common.register.RegisterProperties;
-import com.github.easyrpc.common.register.RegisterPropertiesReader;
 import com.github.easyrpc.common.serialize.SerializeFactory;
 import com.github.easyrpc.common.serialize.Serializer;
 import com.github.easyrpc.common.spi.SPILoader;
 import com.github.easyrpc.common.util.Assert;
 import com.github.easyrpc.common.util.BannerPrinter;
-import com.github.easyrpc.common.util.ReflectionUtils;
-import com.github.easyrpc.common.util.SingletonFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -72,40 +64,12 @@ public abstract class AbstractContext extends ObservableContext implements ICont
 
     private void prepareContext(){
         contextRunning = new AtomicBoolean(true);
+        this.classLoader = this.getClass().getClassLoader();
     }
 
     private void readConfig(AppConfig config){
-
-        ConfigReader configReader = getConfigReader();
-        if (null != config){
-            appConfig = config;
-        } else {
-            appConfig = new AppConfig();
-        }
-
-        appConfig = this.onPreReadConfig(appConfig);
-
-        if (null == appConfig.getRegisterProperties()){
-            RegisterProperties registerProperties = RegisterPropertiesReader.read(configReader);
-            appConfig.setRegisterProperties(registerProperties);
-        }
-
-        if (StringUtils.isEmpty(appConfig.getSerializerProtocol())){
-            String protocolName = configReader.getValue(AppConstants.SERIALIZER_PROTOCOL);
-            appConfig.setSerializerProtocol(protocolName);
-        }
-
-        if (StringUtils.isEmpty(appConfig.getProviderRegisterClass())){
-            String providerClass = configReader.getValue(AppConstants.PROVIDER_REGISTER_TYPE);
-            appConfig.setProviderRegisterClass(providerClass);
-        }
-
-        if (StringUtils.isEmpty(appConfig.getProviderRegisterName())){
-            String providerName = configReader.getValue(AppConstants.PROVIDER_REGISTER_NAME);
-            appConfig.setProviderRegisterName(providerName);
-        }
-
-        appConfig = this.onPostReadConfig(appConfig, configReader);
+        Assert.notNull(config, "app config is null");
+        appConfig = this.onReadConfig(config);
     }
 
     private void printBanner(){
@@ -121,7 +85,6 @@ public abstract class AbstractContext extends ObservableContext implements ICont
     private void refresh(){
         this.preRefresh();
         log.info("context refresh");
-        SingletonFactory.clean();
         onRefresh();
         this.postRefresh();
     }
@@ -136,7 +99,7 @@ public abstract class AbstractContext extends ObservableContext implements ICont
 
     private void loadSerializer(){
 
-        String serializerProtocol = appConfig.getSerializerProtocol();
+        String serializerProtocol = appConfig.getSerializer();
         if (StringUtils.isEmpty(serializerProtocol)){
             serializer = SerializeFactory.getDefaultSerializer();
             log.info("use default serializer: {}", serializer.getClass().getName());
@@ -163,46 +126,14 @@ public abstract class AbstractContext extends ObservableContext implements ICont
 
     private void initRegister(){
 
-        RegisterFactory registerFactory = null;
+        String registryAddress = appConfig.getRegistryAddress();
+        Assert.notNull(registryAddress, "registry address is null");
 
-        String providerClass = appConfig.getProviderRegisterClass();
-        if (StringUtils.isNotEmpty(providerClass)){
-            // FIXME 类加载器加载不到
-            registerFactory = ReflectionUtils.instantiate(providerClass, RegisterFactory.class, null);
-        } else {
-
-            List<RegisterFactory> providerRegisterList = SPILoader.loadFactories(RegisterFactory.class, classLoader);
-            Assert.notEmpty(providerRegisterList, "load provider register error: not found");
-            if (providerRegisterList.size() == 1) {
-                registerFactory = providerRegisterList.get(0);
-                log.info("load provider register: {}", registerFactory.getClass().getName());
-            } else {
-                String providerName = appConfig.getProviderRegisterName();
-                Optional<RegisterFactory> first = providerRegisterList.stream()
-                        .filter(p -> StringUtils.equals(p.getName(), providerName))
-                        .findFirst();
-                if (first.isPresent()) {
-                    registerFactory = first.get();
-                } else {
-                    throw new RuntimeException("invalid provider register name: " + providerName);
-                }
-            }
-        }
-
-        RegisterProperties registerProperties = appConfig.getRegisterProperties();
-        providerRegister = registerFactory.getInstance(registerProperties);
-        log.info("use register center: {}", providerRegister.getClass().getName());
+        providerRegister = DefaultRegisterFactory.getProviderRegister(registryAddress, classLoader);
+        log.info("use register center: {}", this.providerRegister.getClass().getName());
     }
 
-    protected ConfigReader getConfigReader(){
-        return new DefaultConfigReader();
-    }
-
-    protected AppConfig onPreReadConfig(AppConfig config){
-        return config;
-    }
-
-    protected AppConfig onPostReadConfig(AppConfig config, ConfigReader configReader){
+    protected AppConfig onReadConfig(AppConfig config){
         return config;
     }
 

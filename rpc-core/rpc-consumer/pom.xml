@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.github.giveme0101</groupId>
-        <artifactId>easy-rpc</artifactId>
+        <artifactId>rpc-core</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

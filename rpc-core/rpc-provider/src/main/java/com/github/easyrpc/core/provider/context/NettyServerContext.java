@@ -1,16 +1,11 @@
 package com.github.easyrpc.core.provider.context;
 
-import com.github.easyrpc.common.config.AppConfig;
-import com.github.easyrpc.common.config.ConfigReader;
-import com.github.easyrpc.common.constant.AppConstants;
 import com.github.easyrpc.common.context.AbstractContext;
 import com.github.easyrpc.common.entity.ContextEvent;
 import com.github.easyrpc.common.entity.RpcServiceReference;
-import com.github.easyrpc.common.util.Assert;
-import com.github.easyrpc.common.util.SingletonFactory;
+import com.github.easyrpc.core.provider.ProviderConfig;
 import com.github.easyrpc.core.provider.server.NettyServer;
 import com.github.easyrpc.core.provider.util.LocalAddressHolder;
-import com.github.easyrpc.core.provider.util.RpcScanner;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,14 +24,9 @@ public class NettyServerContext extends AbstractContext implements Observer {
 
     private Thread daemonThead;
     private NettyServer httpServer;
-    protected ServiceProvider serviceProvider;
-    private String scanPackage;
+    private ServiceProvider serviceProvider;
 
-    public NettyServerContext(){
-        super(null);
-    }
-
-    public NettyServerContext(AppConfig config){
+    public NettyServerContext(ProviderConfig config){
         super(config);
     }
 
@@ -44,7 +34,7 @@ public class NettyServerContext extends AbstractContext implements Observer {
     protected void onRefresh() {
         this.prepare();
         this.registerEventListener();
-        this.scanRpcProviderService();
+        this.loadRpcProviderService();
         this.initNettyServer();
     }
 
@@ -63,13 +53,6 @@ public class NettyServerContext extends AbstractContext implements Observer {
         }
     }
 
-    @Override
-    protected AppConfig onPostReadConfig(AppConfig config, ConfigReader configReader) {
-        scanPackage = configReader.getValue(AppConstants.K_SERVICE_IMPL_PACKAGE);
-        Assert.notNull(scanPackage, "provider scan package is null");
-        return config;
-    }
-
     protected void prepare(){
         serviceProvider = new ServiceProviderImpl();
     }
@@ -79,12 +62,14 @@ public class NettyServerContext extends AbstractContext implements Observer {
         this.addListener(this);
     }
 
-    protected void scanRpcProviderService(){
-        List<RpcServiceReference> rpcServiceReferences = RpcScanner.scanRpcService(scanPackage);
-        for (final RpcServiceReference rpcServiceReference : rpcServiceReferences) {
-            Object instance = SingletonFactory.getInstance(rpcServiceReference.getImplClass());
-            serviceProvider.addService(instance, rpcServiceReference);
-            log.info("scan impl {} -> {}", rpcServiceReference.getServiceName(), instance);
+    protected void loadRpcProviderService(){
+        ProviderConfig providerConfig = (ProviderConfig) appConfig;
+        List<RpcServiceReference> rpcServiceReferences = providerConfig.getRpcServiceReferences();
+        if (null != rpcServiceReferences && rpcServiceReferences.size() > 0){
+            for (final RpcServiceReference rpcServiceReference : rpcServiceReferences) {
+                serviceProvider.addService(rpcServiceReference.getInstance(), rpcServiceReference);
+                log.info("load impl {} -> {}", rpcServiceReference.getServiceName(), rpcServiceReference.getInstance().getClass().getName());
+            }
         }
     }
 

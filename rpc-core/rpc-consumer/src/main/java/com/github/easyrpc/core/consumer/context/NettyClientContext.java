@@ -1,5 +1,6 @@
 package com.github.easyrpc.core.consumer.context;
 
+import com.github.easyrpc.common.config.AppConfig;
 import com.github.easyrpc.common.context.AbstractContext;
 import com.github.easyrpc.core.consumer.client.NettyClient;
 import com.github.easyrpc.core.consumer.factory.DefaultProxyFactory;
@@ -18,8 +19,8 @@ public class NettyClientContext extends AbstractContext implements IClientFactor
     private NettyClient httpServer;
     private DefaultProxyFactory proxyFactory;
 
-    public NettyClientContext(){
-        super(null);
+    public NettyClientContext(AppConfig appConfig){
+        super(appConfig);
     }
 
     @Override
@@ -48,6 +49,11 @@ public class NettyClientContext extends AbstractContext implements IClientFactor
     @Override
     public <T> T getClient(Class<T> clazz) {
         return proxyFactory.getClient(clazz);
+    }
+
+    @Override
+    public <T> T getClient(Class<T> clazz, String serviceName, String version) {
+        return proxyFactory.getClient(clazz, serviceName, version);
     }
 
 }

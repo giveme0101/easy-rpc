@@ -1,7 +1,4 @@
 
 easy-rpc:
   serializer: kryo
-  registry:
-    host: 192.168.200.244
-    port: 6379
-    password: mypassword
+  registry-address: redis://mypassword@192.168.200.244:6379

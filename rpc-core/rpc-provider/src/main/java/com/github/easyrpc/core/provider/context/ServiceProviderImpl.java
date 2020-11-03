@@ -25,24 +25,23 @@ public class ServiceProviderImpl implements ServiceProvider {
     }
 
     @Override
-    public void addService(Object service, RpcServiceReference rpcServiceProperties) {
+    public void addService(Object service, RpcServiceReference rpcServiceReference) {
 
-        String serviceName = rpcServiceProperties.getServiceName();
-
-        if (serviceMap.containsKey(serviceName)) {
+        String serviceKey = getKey(rpcServiceReference);
+        if (serviceMap.containsKey(serviceKey)) {
             return;
         }
 
-        serviceMap.put(serviceName, service);
-        log.debug("add service {} -> {}", serviceName, service.getClass().getName());
+        serviceMap.put(serviceKey, service);
+        log.debug("add service {} -> {}", serviceKey, service.getClass().getName());
     }
 
     @Override
-    public Object getService(RpcServiceReference rpcServiceProperties) {
+    public Object getService(RpcServiceReference rpcServiceReference) {
 
-        String serviceName = rpcServiceProperties.getServiceName();
+        String serviceKey = getKey(rpcServiceReference);
 
-        Object service = serviceMap.get(serviceName);
+        Object service = serviceMap.get(serviceKey);
         if (service != null) {
             return service;
         }
@@ -53,6 +52,14 @@ public class ServiceProviderImpl implements ServiceProvider {
     @Override
     public Iterator<Map.Entry<String, Object>> iterator() {
         return serviceMap.entrySet().iterator();
+    }
+
+    private String getKey(RpcServiceReference rpcServiceReference){
+
+        String serviceName = rpcServiceReference.getServiceName();
+        String version = rpcServiceReference.getVersion();
+
+        return serviceName + "::" + version;
     }
 
 }

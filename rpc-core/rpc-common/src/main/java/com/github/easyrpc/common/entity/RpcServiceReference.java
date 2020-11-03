@@ -26,10 +26,6 @@ public class RpcServiceReference {
 
     private Class interfaceClass;
 
-    private Class implClass;
-
-    public String toRpcServiceName() {
-        return this.getServiceName() + this.getGroup() + this.getVersion();
-    }
+    private Object instance;
 
 }

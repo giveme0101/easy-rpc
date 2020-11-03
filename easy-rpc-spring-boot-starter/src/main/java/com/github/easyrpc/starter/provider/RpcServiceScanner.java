@@ -1,6 +1,5 @@
 package com.github.easyrpc.starter.provider;
 
-import com.github.easyrpc.core.provider.RpcService;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;

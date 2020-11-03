@@ -18,10 +18,6 @@
         </dependency>
         <dependency>
             <groupId>com.github.giveme0101</groupId>
-            <artifactId>redis-register</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.giveme0101</groupId>
             <artifactId>rpc-demo-api</artifactId>
         </dependency>
     </dependencies>

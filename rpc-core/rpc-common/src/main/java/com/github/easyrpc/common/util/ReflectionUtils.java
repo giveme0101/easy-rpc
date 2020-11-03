@@ -3,6 +3,7 @@ package com.github.easyrpc.common.util;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 /**
@@ -41,6 +42,13 @@ public class ReflectionUtils {
         if ((!Modifier.isPublic(ctor.getModifiers()) ||
                 !Modifier.isPublic(ctor.getDeclaringClass().getModifiers())) && !ctor.isAccessible()) {
             ctor.setAccessible(true);
+        }
+    }
+
+    public static void makeAccessible(Field field) {
+        if ((!Modifier.isPublic(field.getModifiers()) ||
+                !Modifier.isPublic(field.getDeclaringClass().getModifiers())) && !field.isAccessible()) {
+            field.setAccessible(true);
         }
     }
 

@@ -2,7 +2,6 @@ package com.github.easyrpc.provider.service;
 
 import com.github.giveme0101.api.IProductRpc;
 import com.github.giveme0101.api.entity.ProductDTO;
-import com.github.easyrpc.core.provider.RpcService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
  * @Date 2020/09/15 17:53
  */
 @Slf4j
-@RpcService
 public class ProductServiceImpl implements IProductRpc {
 
     @Override

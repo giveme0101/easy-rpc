@@ -12,7 +12,6 @@
 
     <modules>
         <module>rpc-core</module>
-        <module>register</module>
         <module>rpc-demo</module>
         <module>easy-rpc-spring-boot-starter</module>
     </modules>
@@ -21,6 +20,7 @@
 
         <rpc-core.version>1.0-SNAPSHOT</rpc-core.version>
         <rpc-common.version>1.0-SNAPSHOT</rpc-common.version>
+        <register.version>1.0-SNAPSHOT</register.version>
         <rpc-consumer.version>1.0-SNAPSHOT</rpc-consumer.version>
         <rpc-provider.version>1.0-SNAPSHOT</rpc-provider.version>
         <easy-rpc-spring-boot-starter.version>1.0-SNAPSHOT</easy-rpc-spring-boot-starter.version>
@@ -83,6 +83,11 @@
                 <version>${rpc-core.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.github.giveme0101</groupId>
+                <artifactId>register</artifactId>
+                <version>${register.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.giveme0101</groupId>
                 <artifactId>rpc-common</artifactId>

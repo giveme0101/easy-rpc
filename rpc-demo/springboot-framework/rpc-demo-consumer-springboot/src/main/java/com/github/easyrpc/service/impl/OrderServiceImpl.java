@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl implements IOrderService {
 
-    @RpcReference
+    @RpcReference(serviceName = "orderRpc", version = "1.0")
     private IOrderRpc orderRpc;
 
     @Override

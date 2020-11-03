@@ -1,8 +1,6 @@
 package com.github.easyrpc.common.config;
 
-import com.github.easyrpc.common.register.RegisterProperties;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @Author kevin xiajun94@FoxMail.com
@@ -12,26 +10,19 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppConfig {
 
     /**
      * 注册中心配置
      */
-    private RegisterProperties registerProperties;
+    private String registryAddress;
 
     /**
      * 序列化协议
      */
-    private String serializerProtocol;
-
-    /**
-     * 注册中心工厂类
-     */
-    private String providerRegisterClass;
-
-    /**
-     * 注册中心筛选
-     */
-    private String providerRegisterName;
+    private String serializer;
 
 }

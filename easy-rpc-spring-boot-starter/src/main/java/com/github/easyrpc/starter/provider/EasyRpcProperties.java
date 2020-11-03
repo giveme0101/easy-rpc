@@ -1,6 +1,5 @@
 package com.github.easyrpc.starter.provider;
 
-import com.github.easyrpc.common.register.RegisterProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -19,7 +18,7 @@ public class EasyRpcProperties {
     /**
      * 注册中心配置
      */
-    private RegisterProperties registry;
+    private String registryAddress;
     /**
      * 序列化方式
      */

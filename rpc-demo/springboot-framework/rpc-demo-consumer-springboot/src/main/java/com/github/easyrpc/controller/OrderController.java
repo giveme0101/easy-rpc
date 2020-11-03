@@ -19,7 +19,7 @@ public class OrderController {
 
     private IOrderService orderService;
 
-    @GetMapping()
+    @GetMapping(value = "/order")
     public OrderVO getOrder(@RequestParam(value = "orderNo") String orderNo){
         return orderService.getOrder(orderNo);
     }

@@ -35,7 +35,9 @@ public class DefaultProxyFactory extends AbstractProxyFactory {
 
         CompletableFuture<RpcResponse> resultFuture = new CompletableFuture<>();
 
-        InetSocketAddress provider = providerDiscover.lookupProvider(request.getClassName());
+        String serviceKey = request.getClassName() + "::" + request.getVersion();
+
+        InetSocketAddress provider = providerDiscover.lookupProvider(serviceKey);
         if (null == provider){
             throw new RpcException("provider not found");
         }
