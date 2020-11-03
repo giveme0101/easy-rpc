@@ -23,7 +23,7 @@ public class OrderRpcImplV2 implements IOrderRpc {
         log.info("orderNo: {}", orderNo);
         OrderDTO orderDTO = OrderDTO.builder()
                 .orderNo("V2 -- " + orderNo)
-                .orderAmount(10.1)
+                .orderAmount(22.2)
                 .createTime(new Date())
                 .build();
 

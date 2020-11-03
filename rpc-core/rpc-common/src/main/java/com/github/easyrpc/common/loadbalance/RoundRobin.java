@@ -21,6 +21,7 @@ public class RoundRobin implements LoadBalance{
             POS.set(0);
         }
 
-        return new ArrayList<>(list).get(POS.getAndAdd(1));
+        int idx = POS.getAndAdd(1);
+        return new ArrayList<>(list).get(idx);
     }
 }
