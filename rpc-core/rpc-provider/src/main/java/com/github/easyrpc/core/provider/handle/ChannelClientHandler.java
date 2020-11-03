@@ -1,9 +1,10 @@
-package com.github.easyrpc.core.consumer.handle;
+package com.github.easyrpc.core.provider.handle;
 
 import com.github.easyrpc.common.constant.RequestTypeEnum;
 import com.github.easyrpc.common.entity.RpcRequest;
 import com.github.easyrpc.common.entity.RpcResponse;
-import com.github.easyrpc.core.consumer.util.ProcessingRequests;
+import com.github.easyrpc.core.provider.util.ProcessingRequests;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
@@ -19,7 +20,7 @@ import java.util.UUID;
  * @Date 2020/09/14 10:59
  */
 @Slf4j
-//@ChannelHandler.Sharable
+@ChannelHandler.Sharable
 public class ChannelClientHandler extends SimpleChannelInboundHandler<RpcResponse> {
 
     @Override

@@ -1,4 +1,4 @@
-package com.github.easyrpc.core.consumer.client;
+package com.github.easyrpc.core.provider.client;
 
 import io.netty.channel.Channel;
 

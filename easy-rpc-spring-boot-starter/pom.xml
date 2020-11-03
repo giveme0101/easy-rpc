@@ -29,10 +29,6 @@
             <groupId>com.github.giveme0101</groupId>
             <artifactId>rpc-provider</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.github.giveme0101</groupId>
-            <artifactId>rpc-consumer</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

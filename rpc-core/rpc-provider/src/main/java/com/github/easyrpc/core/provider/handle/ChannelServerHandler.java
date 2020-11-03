@@ -5,8 +5,9 @@ import com.github.easyrpc.common.entity.ResponseCodeEnum;
 import com.github.easyrpc.common.entity.RpcRequest;
 import com.github.easyrpc.common.entity.RpcResponse;
 import com.github.easyrpc.common.exception.RpcException;
-import com.github.easyrpc.core.provider.context.ServiceProvider;
+import com.github.easyrpc.core.provider.server.ServiceProvider;
 import com.github.easyrpc.core.provider.util.RpcRequestHandler;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
@@ -22,6 +23,7 @@ import java.net.SocketAddress;
  * @Date 2020/09/14 14:05
  */
 @Slf4j
+@ChannelHandler.Sharable
 public class ChannelServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
     private int idleCount = 0;

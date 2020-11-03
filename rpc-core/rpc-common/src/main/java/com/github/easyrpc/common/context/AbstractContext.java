@@ -1,6 +1,6 @@
 package com.github.easyrpc.common.context;
 
-import com.github.easyrpc.common.config.AppConfig;
+import com.github.easyrpc.common.config.ProviderConfig;
 import com.github.easyrpc.common.entity.ContextEvent;
 import com.github.easyrpc.common.register.DefaultRegisterFactory;
 import com.github.easyrpc.common.register.ProviderRegister;
@@ -32,11 +32,11 @@ public abstract class AbstractContext extends ObservableContext implements ICont
      * 序列化方式
      */
     protected Serializer serializer;
-    protected AppConfig appConfig;
+    protected ProviderConfig appConfig;
     protected ClassLoader classLoader;
     private AtomicBoolean contextRunning;
 
-    public AbstractContext(AppConfig appConfig){
+    public AbstractContext(ProviderConfig appConfig){
         this.prepareContext();
         this.readConfig(appConfig);
         this.printBanner();
@@ -67,7 +67,7 @@ public abstract class AbstractContext extends ObservableContext implements ICont
         this.classLoader = this.getClass().getClassLoader();
     }
 
-    private void readConfig(AppConfig config){
+    private void readConfig(ProviderConfig config){
         Assert.notNull(config, "app config is null");
         appConfig = this.onReadConfig(config);
     }
@@ -133,7 +133,7 @@ public abstract class AbstractContext extends ObservableContext implements ICont
         log.info("use register center: {}", this.providerRegister.getClass().getName());
     }
 
-    protected AppConfig onReadConfig(AppConfig config){
+    protected ProviderConfig onReadConfig(ProviderConfig config){
         return config;
     }
 

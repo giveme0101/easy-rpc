@@ -1,4 +1,4 @@
-package com.github.easyrpc.core.consumer.factory;
+package com.github.easyrpc.core.provider.factory;
 
 public interface IClientFactory {
 

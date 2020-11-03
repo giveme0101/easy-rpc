@@ -1,7 +1,7 @@
 package com.github.easyrpc.provider;
 
 import com.github.easyrpc.common.entity.RpcServiceReference;
-import com.github.easyrpc.core.provider.ProviderConfig;
+import com.github.easyrpc.common.config.ProviderConfig;
 import com.github.easyrpc.core.provider.context.NettyServerContext;
 import com.github.easyrpc.provider.service.OrderServiceImpl;
 import com.github.easyrpc.provider.service.ProductServiceImpl;
