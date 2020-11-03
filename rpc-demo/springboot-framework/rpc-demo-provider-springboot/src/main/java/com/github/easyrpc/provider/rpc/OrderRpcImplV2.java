@@ -1,8 +1,8 @@
 package com.github.easyrpc.provider.rpc;
 
 import com.github.easyrpc.starter.provider.RpcService;
-import com.github.giveme0101.api.IOrderRpc;
-import com.github.giveme0101.api.entity.OrderDTO;
+import com.github.api.IOrderRpc;
+import com.github.api.entity.OrderDTO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
