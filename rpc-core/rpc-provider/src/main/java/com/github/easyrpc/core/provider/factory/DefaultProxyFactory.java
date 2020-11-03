@@ -3,6 +3,7 @@ package com.github.easyrpc.core.provider.factory;
 import com.github.easyrpc.common.entity.RpcRequest;
 import com.github.easyrpc.common.entity.RpcResponse;
 import com.github.easyrpc.common.exception.RpcException;
+import com.github.easyrpc.common.loadbalance.RoundRobin;
 import com.github.easyrpc.common.register.ProviderRegister;
 import com.github.easyrpc.core.provider.client.ChannelProvider;
 import com.github.easyrpc.core.provider.util.ProcessingRequests;
@@ -37,7 +38,7 @@ public class DefaultProxyFactory extends AbstractProxyFactory {
 
         String serviceKey = request.getClassName() + ":" + request.getVersion();
 
-        InetSocketAddress provider = providerDiscover.lookupProvider(serviceKey);
+        InetSocketAddress provider = providerDiscover.lookupProvider(serviceKey, new RoundRobin());
         if (null == provider){
             throw new RpcException("provider not found");
         }

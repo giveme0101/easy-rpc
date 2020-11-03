@@ -52,11 +52,11 @@ public class RedisRegister implements ProviderRegister {
     @Override
     public InetSocketAddress lookupProvider(String nozzle, LoadBalance balance) {
         Set<String> members = jedis.smembers(nozzle);
-        String member = balance.select(members);
-        if (null == member || member.isEmpty()){
+        if (members.size() < 1){
             throw new RuntimeException("获取服务失败！");
         }
 
+        String member = balance.select(members);
         String[] socketAddressArray = member.split(":");
         String host = socketAddressArray[0];
         int port = Integer.parseInt(socketAddressArray[1]);

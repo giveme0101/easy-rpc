@@ -20,6 +20,6 @@ public @interface RpcService {
 
     String serviceName() default "";
 
-    String version() default "";
+    String version() default "1.0";
 
 }
