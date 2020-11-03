@@ -1,6 +1,6 @@
-package com.github.giveme0101.api;
+package com.github.api;
 
-import com.github.giveme0101.api.entity.ProductDTO;
+import com.github.api.entity.ProductDTO;
 
 /**
  * @Author kevin xiajun94@FoxMail.com

@@ -3,8 +3,8 @@ package com.github.easyrpc.service.impl;
 import com.github.easyrpc.entity.OrderVO;
 import com.github.easyrpc.service.IOrderService;
 import com.github.easyrpc.starter.RpcReference;
-import com.github.giveme0101.api.IOrderRpc;
-import com.github.giveme0101.api.entity.OrderDTO;
+import com.github.api.IOrderRpc;
+import com.github.api.entity.OrderDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

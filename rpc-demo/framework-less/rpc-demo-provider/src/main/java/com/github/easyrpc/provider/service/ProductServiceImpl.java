@@ -1,7 +1,7 @@
 package com.github.easyrpc.provider.service;
 
-import com.github.giveme0101.api.IProductRpc;
-import com.github.giveme0101.api.entity.ProductDTO;
+import com.github.api.IProductRpc;
+import com.github.api.entity.ProductDTO;
 import lombok.extern.slf4j.Slf4j;
 
 /**

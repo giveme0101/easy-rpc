@@ -2,10 +2,10 @@ package com.github.easyrpc.consumer;
 
 import com.github.easyrpc.common.config.ProviderConfig;
 import com.github.easyrpc.core.provider.context.NettyServerContext;
-import com.github.giveme0101.api.IOrderRpc;
-import com.github.giveme0101.api.IProductRpc;
-import com.github.giveme0101.api.entity.OrderDTO;
-import com.github.giveme0101.api.entity.ProductDTO;
+import com.github.api.IOrderRpc;
+import com.github.api.IProductRpc;
+import com.github.api.entity.OrderDTO;
+import com.github.api.entity.ProductDTO;
 import lombok.extern.slf4j.Slf4j;
 
 /**

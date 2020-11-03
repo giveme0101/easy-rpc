@@ -1,4 +1,4 @@
-package com.github.giveme0101.api.entity;
+package com.github.api.entity;
 
 import lombok.Builder;
 import lombok.Data;
