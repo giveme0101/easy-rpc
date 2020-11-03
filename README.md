@@ -9,7 +9,7 @@ A easy rpc framework with Netty
 * [x] [负载均衡](#负载均衡)
 * [X] [SPI](#SPI)
 * [ ] 断线重连
-* [ ] 整合SpringBoot
+* [X] easy-rpc-spring-boot-starter
 
 ### netty
 底层用netty通信
